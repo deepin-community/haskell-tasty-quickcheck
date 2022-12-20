@@ -1,0 +1,70 @@
+Source: haskell-tasty-quickcheck
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Uploaders: Clint Adams <clint@debian.org>
+Priority: optional
+Section: haskell
+Rules-Requires-Root: no
+Build-Depends: debhelper (>= 10),
+ haskell-devscripts (>= 0.13),
+ cdbs,
+ ghc (>= 8.0),
+ ghc-prof,
+ libghc-quickcheck2-dev (>= 2.10),
+ libghc-quickcheck2-prof,
+ libghc-optparse-applicative-dev,
+ libghc-optparse-applicative-prof,
+ libghc-random-dev,
+ libghc-random-prof,
+ libghc-tagged-dev,
+ libghc-tagged-prof,
+ libghc-tasty-dev (>= 1.0.1),
+ libghc-tasty-prof,
+Build-Depends-Indep: ghc-doc,
+ libghc-quickcheck2-doc,
+ libghc-optparse-applicative-doc,
+ libghc-random-doc,
+ libghc-tagged-doc,
+ libghc-tasty-doc,
+Standards-Version: 4.1.4
+Homepage: https://github.com/feuerbach/tasty
+Vcs-Browser: https://salsa.debian.org/haskell-team/DHG_packages/tree/master/p/haskell-tasty-quickcheck
+Vcs-Git: https://salsa.debian.org/haskell-team/DHG_packages.git [p/haskell-tasty-quickcheck]
+X-Description: Haskell testing framework, QuickCheck support
+ QuickCheck support for the Tasty test framework.
+
+Package: libghc-tasty-quickcheck-dev
+Architecture: any
+Depends: ${haskell:Depends},
+ ${shlibs:Depends},
+ ${misc:Depends},
+Recommends: ${haskell:Recommends},
+Suggests: ${haskell:Suggests},
+Provides: ${haskell:Provides},
+Description: ${haskell:ShortDescription}${haskell:ShortBlurb}
+ ${haskell:LongDescription}
+ .
+ ${haskell:Blurb}
+
+Package: libghc-tasty-quickcheck-prof
+Architecture: any
+Depends: ${haskell:Depends},
+ ${misc:Depends},
+Recommends: ${haskell:Recommends},
+Suggests: ${haskell:Suggests},
+Provides: ${haskell:Provides},
+Description: ${haskell:ShortDescription}${haskell:ShortBlurb}
+ ${haskell:LongDescription}
+ .
+ ${haskell:Blurb}
+
+Package: libghc-tasty-quickcheck-doc
+Architecture: all
+Section: doc
+Depends: ${misc:Depends},
+ ${haskell:Depends},
+Recommends: ${haskell:Recommends},
+Suggests: ${haskell:Suggests},
+Description: ${haskell:ShortDescription}${haskell:ShortBlurb}
+ ${haskell:LongDescription}
+ .
+ ${haskell:Blurb}
