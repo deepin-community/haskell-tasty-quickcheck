@@ -2,7 +2,7 @@
 -- documentation, see http://haskell.org/cabal/users-guide/
 
 name:                tasty-quickcheck
-version:             0.10.1.1
+version:             0.10.2
 synopsis:            QuickCheck support for the Tasty test framework.
 description:         QuickCheck support for the Tasty test framework.
 license:             MIT
@@ -10,8 +10,8 @@ license-file:        LICENSE
 author:              Roman Cheplyaka <roma@ro-che.info>
 maintainer:          Roman Cheplyaka <roma@ro-che.info>
 -- copyright:
-homepage:            https://github.com/feuerbach/tasty
-bug-reports:         https://github.com/feuerbach/tasty/issues
+homepage:            https://github.com/UnkindPartition/tasty
+bug-reports:         https://github.com/UnkindPartition/tasty/issues
 category:            Testing
 build-type:          Simple
 extra-source-files:  CHANGELOG.md
@@ -19,14 +19,14 @@ cabal-version:       >=1.10
 
 Source-repository head
   type:     git
-  location: git://github.com/feuerbach/tasty.git
+  location: git://github.com/UnkindPartition/tasty.git
   subdir:   quickcheck
 
 library
   exposed-modules:     Test.Tasty.QuickCheck
   -- other-modules:
   other-extensions:    GeneralizedNewtypeDeriving, DeriveDataTypeable
-  build-depends:       base == 4.*, tagged, tasty >= 1.0.1, random, QuickCheck >= 2.10,
+  build-depends:       base >= 4.8 && < 5, tagged, tasty >= 1.0.1, random, QuickCheck >= 2.10,
                        optparse-applicative
 
   -- hs-source-dirs:
@@ -45,9 +45,11 @@ test-suite test
   main-is:
     test.hs
   build-depends:
-      base >= 4 && < 5
+      base >= 4.7 && < 5
     , tasty
     , tasty-quickcheck
     , tasty-hunit
     , pcre-light
   ghc-options: -Wall
+  if (!impl(ghc >= 8.0) || os(windows))
+    buildable: False

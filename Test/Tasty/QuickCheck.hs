@@ -9,6 +9,8 @@ module Test.Tasty.QuickCheck
   , QuickCheckMaxSize(..)
   , QuickCheckMaxRatio(..)
   , QuickCheckVerbose(..)
+  , QuickCheckMaxShrinks(..)
+    -- * Re-export of Test.QuickCheck
   , module Test.QuickCheck
     -- * Internal
     -- | If you are building a test suite, you don't need these functions.
@@ -51,10 +53,9 @@ import Text.Printf
 import Test.QuickCheck.Random (mkQCGen)
 import Options.Applicative (metavar)
 import System.Random (getStdRandom, randomR)
-#if !MIN_VERSION_base(4,8,0)
+#if !MIN_VERSION_base(4,9,0)
 import Control.Applicative
 import Data.Monoid
-import Data.Proxy
 #endif
 
 newtype QC = QC QC.Property
@@ -96,6 +97,8 @@ newtype QuickCheckVerbose = QuickCheckVerbose Bool
   deriving (Typeable)
 
 -- | Number of shrinks allowed before QuickCheck will fail a test.
+--
+-- @since 0.10.2
 newtype QuickCheckMaxShrinks = QuickCheckMaxShrinks Int
   deriving (Num, Ord, Eq, Real, Enum, Integral, Typeable)
 
@@ -103,7 +106,7 @@ instance IsOption QuickCheckTests where
   defaultValue = 100
   parseValue =
     -- We allow numeric underscores for readability; see
-    -- https://github.com/feuerbach/tasty/issues/263
+    -- https://github.com/UnkindPartition/tasty/issues/263
     fmap QuickCheckTests . safeRead . filter (/= '_')
   optionName = return "quickcheck-tests"
   optionHelp = return "Number of test cases for QuickCheck to generate. Underscores accepted: e.g. 10_000_000"
